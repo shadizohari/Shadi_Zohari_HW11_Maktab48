@@ -1,9 +1,8 @@
 import './Register.css';
 import React, { useState } from 'react'
+import validator from 'validator'
 import { FaEyeSlash } from 'react-icons/fa';
 import { FaEye } from 'react-icons/fa';
-
-
 
 const Register = ({ display, invalid, ...props }) => {
     const [validInputs, setState] = useState({
@@ -12,11 +11,13 @@ const Register = ({ display, invalid, ...props }) => {
         inputProvinces: false,
         inputTown: false,
         inputEmail: false,
-        inputPass: false
+        inputPass: false,
+        inputEdu: false,
+        inputEduPlace: false
     })
 
     const checkName = function (e) {
-        let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass } = validInputs;
+        let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
         inputName = (e.target.value) ? true : false;
         setState((state, props) => ({
             inputName: inputName,
@@ -24,11 +25,15 @@ const Register = ({ display, invalid, ...props }) => {
             inputProvinces: inputProvinces,
             inputTown: inputTown,
             inputEmail: inputEmail,
-            inputPass: inputPass
+            inputPass: inputPass,
+            inputEdu: inputEdu,
+            inputEduPlace: inputEduPlace,
+
         }));
     }
+
     const checkLast = function (e) {
-        let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass } = validInputs;
+        let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
         inputLast = (e.target.value) ? true : false;
         setState((state, props) => ({
             inputName: inputName,
@@ -36,77 +41,115 @@ const Register = ({ display, invalid, ...props }) => {
             inputProvinces: inputProvinces,
             inputTown: inputTown,
             inputEmail: inputEmail,
-            inputPass: inputPass
+            inputPass: inputPass,
+            inputEdu: inputEdu,
+            inputEduPlace: inputEduPlace,
         }));
     }
 
-    const [inputNameState, setInputNameState] = useState([{
-        id: "name",
-        classes: "input width",
+    const checkEmail = function (e) {
+        let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
+        inputEmail = validator.isEmail(e.target.value);
+        setState((state, props) => ({
+            inputName: inputName,
+            inputLast: inputLast,
+            inputProvinces: inputProvinces,
+            inputTown: inputTown,
+            inputEmail: inputEmail,
+            inputPass: inputPass,
+            inputEdu: inputEdu,
+            inputEduPlace: inputEduPlace,
+        }));
+    }
+    const checkPass = function (e) {
+        let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
+        inputPass = (e.target.value) ? true : false;
+        setState((state, props) => ({
+            inputName: inputName,
+            inputLast: inputLast,
+            inputProvinces: inputProvinces,
+            inputTown: inputTown,
+            inputEmail: inputEmail,
+            inputPass: inputPass,
+            inputEdu: inputEdu,
+            inputEduPlace: inputEduPlace,
+        }));
+    }
+    const checkTown = function (e) {
+        let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
+        inputTown = (e.target.value) ? true : false;
+        setState((state, props) => ({
+            inputName: inputName,
+            inputLast: inputLast,
+            inputProvinces: inputProvinces,
+            inputTown: inputTown,
+            inputEmail: inputEmail,
+            inputPass: inputPass,
+            inputEdu: inputEdu,
+            inputEduPlace: inputEduPlace,
+        }));
+    }
+    const checkPlaceEdu = function (e) {
+        let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
+        inputEduPlace = (e.target.value) ? true : false;
+        setState((state, props) => ({
+            inputName: inputName,
+            inputLast: inputLast,
+            inputProvinces: inputProvinces,
+            inputTown: inputTown,
+            inputEmail: inputEmail,
+            inputPass: inputPass,
+            inputEdu: inputEdu,
+            inputEduPlace: inputEduPlace,
+        }));
+    }
+    const [inputNameState, setInputNameState] = useState({
         invalid: "",
-        type: "text",
-        placeholder: "نام",
-        fucOnchange: checkName,
-    }])
-    const [inputLastState, setInputLastState] = useState([{
-        id: "Last",
-        classes: "input width",
+    })
+    const [inputLastState, setInputLastState] = useState({
         invalid: "",
-        type: "text",
-        placeholder: "نام خانوادگی",
-        fucOnchange: checkLast,
-    }])
+    })
+    const [inputEmailState, setInputEmailState] = useState({
+        invalid: "",
+    })
+    const [inputPassState, setInputPassState] = useState({
+        invalid: "",
+    })
+    const [inputProvincesState, setInputProvincesState] = useState({
+        invalid: "",
+    })
+    const [inputTownState, setInputTownState] = useState({
+        invalid: "",
+    })
+    const [inputEduState, setInputEduState] = useState({
+        invalid: "",
+    })
+    const [inputEduPlaceState, setInputEduPlaceState] = useState({
+        invalid: "",
+    })
 
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => (setPasswordShown(passwordShown ? false : true))
 
     const [displayEdu, setDisplayEdu] = useState("displayNone");
-    const handelEdu = (event) => (event.target.value) ? setDisplayEdu("display") : setDisplayEdu("displayNone");
+    const handelEdu = function (e) {
+        let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
+        inputEdu = (e.target.value) ? true : false;
+        setState((state, props) => ({
+            inputName: inputName,
+            inputLast: inputLast,
+            inputProvinces: inputProvinces,
+            inputTown: inputTown,
+            inputEmail: inputEmail,
+            inputPass: inputPass,
+            inputEdu: inputEdu,
+            inputEduPlace: inputEduPlace,
+        }));
+        (e.target.value) ? setDisplayEdu("display") : setDisplayEdu("displayNone");
 
-    const submitData = (e) => {
-        e.preventDefault();
-        console.log(validInputs)
-        if (!validInputs.inputName) {
-            setInputNameState([{
-                id: "name",
-                classes: "input width",
-                invalid: "invalid",
-                type: "text",
-                placeholder: "نام",
-                fucOnchange: checkName,
-            }])
-        } else {
-            setInputNameState([{
-                id: "name",
-                classes: "input width",
-                invalid: "",
-                type: "text",
-                placeholder: "نام",
-                fucOnchange: checkName,
-            }])
-
-        }
-        if (!validInputs.inputLast) {
-            setInputLastState([{
-                id: "Last",
-                classes: "input width",
-                invalid: "invalid",
-                type: "text",
-                placeholder: "نام خانوادگی",
-                fucOnchange: checkLast,
-            }])
-
-        } else {
-            setInputLastState([{
-                id: "Last",
-                classes: "input width",
-                invalid: "",
-                type: "text",
-                placeholder: "نام خانوادگی",
-                fucOnchange: checkLast,
-            }])
-        }
     }
+
+
     const eduction = [{
         value: "",
         text: "تحصیلات"
@@ -277,6 +320,18 @@ const Register = ({ display, invalid, ...props }) => {
     }]
 
     const handelProvince = (e) => {
+        let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
+        inputProvinces = (e.target.value) ? true : false;
+        setState((state, props) => ({
+            inputName: inputName,
+            inputLast: inputLast,
+            inputProvinces: inputProvinces,
+            inputTown: inputTown,
+            inputEmail: inputEmail,
+            inputPass: inputPass,
+            inputEdu: inputEdu,
+            inputEduPlace: inputEduPlace,
+        }));
         let town = towns.filter((town, index) => {
             if (town.id === e.target.value) {
                 return town
@@ -284,33 +339,99 @@ const Register = ({ display, invalid, ...props }) => {
         })
         setTown(town[0].towns)
     }
+    const submitData = (e) => {
+        e.preventDefault();
+        if (!validInputs.inputName) {
+            setInputNameState({
+                invalid: "invalid",
+            })
+        } else {
+            setInputNameState({
+                invalid: "",
+            })
+
+        }
+        if (!validInputs.inputLast) {
+            setInputLastState({
+                invalid: "invalid",
+            })
+
+        } else {
+            setInputLastState({
+                invalid: "",
+            })
+        }
+        if (!validInputs.inputEmail) {
+            setInputEmailState({
+                invalid: "invalid",
+            })
+        } else {
+            setInputEmailState({
+                invalid: "",
+            })
+        }
+        if (!validInputs.inputPass) {
+            setInputPassState({
+                invalid: "invalid",
+            })
+        } else {
+            setInputPassState({
+                invalid: "",
+            })
+        }
+        if (!validInputs.inputProvinces) {
+            setInputProvincesState({
+                invalid: "invalid",
+            })
+        } else {
+            setInputProvincesState({
+                invalid: "",
+            })
+        }
+        if (!validInputs.inputTown) {
+            setInputTownState({
+                invalid: "invalid",
+            })
+        } else {
+            setInputTownState({
+                invalid: "",
+            })
+        }
+        if (validInputs.inputEdu && validInputs.inputEduPlace) {
+            setInputEduPlaceState({
+                invalid: "",
+            })
+            setInputEduState({
+                invalid: "",
+            })
+        } else if (validInputs.inputEdu && !validInputs.inputEduPlace) {
+            setInputEduPlaceState({
+                invalid: "invalid",
+            })
+        } else if (!validInputs.inputEdu && validInputs.inputEduPlace) {
+            setInputEduPlaceState({
+                invalid: "invalid",
+            })
+        }
+    }
     return (
         <div className={`container-form`}>
             <h2 className="titr">رایگان ثبت نام کنید</h2>
             <form action="">
                 <div className="flex">
-                    {inputNameState.map((input, index) => {
-                        return (
-                            <input key={input.id} type={input.type} className={`${input.classes} ${invalid = input.invalid}`} placeholder={input.placeholder} onKeyUp={(e) => input.fucOnchange(e)} />
-                        )
-                    })}
-
-                    {inputLastState.map((input, index) => {
-                        return (
-                            <input key={input.id} type={input.type} className={`${input.classes} ${invalid = input.invalid}`} placeholder={input.placeholder} onKeyUp={(e) => input.fucOnchange(e)} />
-                        )
-                    })}
+                    <input type="text" className={`input width ${invalid = inputNameState.invalid}`} placeholder=" &#10035; نام" onKeyUp={(e) => checkName(e)} />
+                    <input type="text" className={`input width ${invalid = inputLastState.invalid}`} placeholder=" &#10035; نام خانوادگی" onKeyUp={(e) => checkLast(e)} />
                 </div>
                 <div className="flex">
                     <label className="provincesLabel"><span>&#10035;</span> محل تولد:</label>
-                    <select name="provinces" id="provinces" name="provinces" onChange={(e) => handelProvince(e)}>
+                    <select className={`${invalid = inputProvincesState.invalid}`} name="provinces" id="provinces" name="provinces" onChange={(e) => handelProvince(e)}>
                         {provinces.map((province, index) => {
                             return (
                                 <option key={province.value} value={province.value} >{province.text}</option>
                             )
                         })}
                     </select>
-                    <select name="towns" id="towns">
+                    <select className={`${invalid = inputTownState.invalid}`} name="towns" id="towns" onChange={(e) => checkTown(e)}>
                         {town.map((town, index) => {
                             return (
                                 <option key={town.value} value={town.value}>{town.text}</option>
@@ -320,19 +441,19 @@ const Register = ({ display, invalid, ...props }) => {
                     </select>
                 </div>
                 <div className="flex">
-                    <select name="eduction" onChange={(e) => handelEdu(e)}>
+                    <select className={`${invalid = inputEduState.invalid}`} name="eduction" onChange={(e) => handelEdu(e)}>
                         {eduction.map((edu, index) => {
                             return (
                                 <option key={edu.value} value={edu.value}>{edu.text}</option>
                             )
                         })}
                     </select>
-                    <input className={`input width  ${display = displayEdu}`} type="text" placeholder="&#10035; محل تحصیل " />
+                    <input className={`input width  ${display = displayEdu} ${invalid = inputEduPlaceState.invalid}`} type="text" placeholder="&#10035; محل تحصیل " onChange={(e) => checkPlaceEdu(e)} />
                 </div>
-                <input className="input" type="email" placeholder=" پست الکترونیک &#10035;" />
-                <div className="flex-pass">
+                <input className={`input ${invalid = inputEmailState.invalid}`} type="email" placeholder=" پست الکترونیک &#10035;" onChange={(e) => checkEmail(e)} />
+                <div className={`flex-pass ${invalid = inputPassState.invalid}`}>
                     {passwordShown ? <FaEye className="icon-eye" onClick={togglePasswordVisiblity} /> : <FaEyeSlash className="icon-eye" onClick={togglePasswordVisiblity} />}
-                    <input type={passwordShown ? "text" : "password"} id="pwd" name="pwd" placeholder=" کلمه عبور &#10035;" />
+                    <input type={passwordShown ? "text" : "password"} id="pwd" name="pwd" placeholder=" کلمه عبور &#10035;" onKeyUp={(e) => checkPass(e)} />
                 </div>
                 <button className="submit" onClick={(e) => submitData(e)}>ثبت نام</button>
             </form>

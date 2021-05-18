@@ -36,10 +36,8 @@ input[type=email].input {
     flex-basis: 48%;
 }
 
-input[type=email]:focus,
-input[type=password]:focus,
-input[type=text].input:focus
-select:focus {
+select:focus,
+input:focus {
     outline: none;
 }
 
@@ -125,16 +123,23 @@ select {
 
 }
 
-#towns,#provinces{
+#towns,
+#provinces {
     flex-basis: 33%;
 }
-.provincesLabel{
-    color:white;
+
+.provincesLabel {
+    color: white;
     font-size: 16px;
 }
-.provincesLabel span{
+
+.provincesLabel span {
     font-size: 12px;
 }
-input[type=text].invalid{
-  border:1px solid  red;
+
+input[type=text].input.invalid,
+input[type=email].invalid,
+.flex-pass.invalid,
+.invalid {
+    border: 1px solid red;
 }
