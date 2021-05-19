@@ -195,11 +195,12 @@ const Register = ({ display, invalid, ...props }) => {
     const handelEdu = function (e) {
         let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
         inputEdu = (e.target.value) ? true : false;
-        let { invalid, value } = inputProvincesState
+        let { invalid, value } = inputEduState
         if (e.target.value) {
             value = e.target.value
+            console.log(value)
         }
-        setInputProvincesState({
+        setInputEduState({
             invalid: invalid,
             value: value
         })
@@ -278,6 +279,10 @@ const Register = ({ display, invalid, ...props }) => {
         id: "تهران",
         towns: [
             {
+                value: "",
+                text: "شهر"
+            },
+            {
                 value: "تهران",
                 text: "تهران"
             }, {
@@ -289,6 +294,9 @@ const Register = ({ display, invalid, ...props }) => {
         id: "اصفهان",
         towns: [
             {
+                value: "",
+                text: "شهر"
+            },{
                 value: "اصفهان",
                 text: "اصفهان"
             }, {
@@ -301,6 +309,9 @@ const Register = ({ display, invalid, ...props }) => {
         id: "خراسان رضوی",
         towns: [
             {
+                value: "",
+                text: "شهر"
+            },{
                 value: "مشهد",
                 text: "مشهد"
             }, {
@@ -312,6 +323,9 @@ const Register = ({ display, invalid, ...props }) => {
         id: "کرمان",
         towns: [
             {
+                value: "",
+                text: "شهر"
+            },{
                 value: "شهربابک",
                 text: "شهربابک"
             }, {
@@ -323,6 +337,9 @@ const Register = ({ display, invalid, ...props }) => {
         id: "یزد",
         towns: [
             {
+                value: "",
+                text: "شهر"
+            },{
                 value: "اردکان",
                 text: "اردکان"
             }, {
@@ -334,6 +351,9 @@ const Register = ({ display, invalid, ...props }) => {
         id: "گلستان",
         towns: [
             {
+                value: "",
+                text: "شهر"
+            },{
                 value: "گنبدکاووس ",
                 text: "گنبدکاووس "
             }, {
@@ -345,6 +365,9 @@ const Register = ({ display, invalid, ...props }) => {
         id: "همدان",
         towns: [
             {
+                value: "",
+                text: "شهر"
+            },{
                 value: "ملایر",
                 text: "ملایر"
             }, {
@@ -356,6 +379,9 @@ const Register = ({ display, invalid, ...props }) => {
         id: "گیلان",
         towns: [
             {
+                value: "",
+                text: "شهر"
+            },{
                 value: "رشت",
                 text: "رشت"
             }, {
@@ -367,6 +393,9 @@ const Register = ({ display, invalid, ...props }) => {
         id: "مازندران",
         towns: [
             {
+                value: "",
+                text: "شهر"
+            },{
                 value: "آمل",
                 text: "آمل"
             }, {
@@ -378,6 +407,9 @@ const Register = ({ display, invalid, ...props }) => {
         id: "لرستان",
         towns: [
             {
+                value: "",
+                text: "شهر"
+            },{
                 value: "خرم‌آباد",
                 text: "خرم‌آباد"
             }, {
@@ -390,6 +422,14 @@ const Register = ({ display, invalid, ...props }) => {
     const handelProvince = (e) => {
         let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
         inputProvinces = (e.target.value) ? true : false;
+        let { invalid, value } = inputProvincesState
+        if (e.target.value) {
+            value = e.target.value
+        }
+        setInputProvincesState({
+            invalid: invalid,
+            value: value
+        })
         setState((state, props) => ({
             inputName: inputName,
             inputLast: inputLast,
@@ -496,9 +536,10 @@ const Register = ({ display, invalid, ...props }) => {
                 invalid: "",
                 value: value
             })
+            let valueEdu = inputEduState.value
             setInputEduState({
                 invalid: "",
-                value: value
+                value: valueEdu
             })
         } else if (validInputs.inputEdu && !validInputs.inputEduPlace) {
             let { value } = inputEduPlaceState
@@ -569,9 +610,9 @@ const Register = ({ display, invalid, ...props }) => {
                 </form>
             </div>
             {displayComponent === 'invisible' && (
-                <InfoRegister nameValue={inputNameState.value} lastValue={inputLastState.value} 
-                emailValue={inputEmailState.value} provincesValue={inputProvincesState.value}
-                townValue={inputTownState.value} eduValue={inputEduState.value} placeEduValue={inputEduPlaceState.value} />
+                <InfoRegister nameValue={inputNameState.value} lastValue={inputLastState.value}
+                    emailValue={inputEmailState.value} provincesValue={inputProvincesState.value}
+                    townValue={inputTownState.value} eduValue={inputEduState.value} placeEduValue={inputEduPlaceState.value} />
             )}
         </div>
     )
