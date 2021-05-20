@@ -5,7 +5,7 @@ import { FaEyeSlash } from 'react-icons/fa';
 import { FaEye } from 'react-icons/fa';
 import InfoRegister from './InfoRegister'
 
-const Register = ({ display, invalid, ...props }) => {
+const Register = ({ display, invalid, passwordShown, togglePasswordVisiblity, ...props }) => {
     const [displayComponent, setDisplayComponent] = useState("visible");
 
     const [validInputs, setState] = useState({
@@ -122,7 +122,7 @@ const Register = ({ display, invalid, ...props }) => {
     }
     const checkPass = function (e) {
         let { inputName, inputLast, inputProvinces, inputTown, inputEmail, inputPass, inputEdu, inputEduPlace } = validInputs;
-        inputPass = (e.target.value) ? true : false;
+        inputPass = (String(e.target.value).length > 7) ? true : false;
         let { invalid, value } = inputPassState
         if (e.target.value) {
             value = e.target.value
@@ -186,10 +186,6 @@ const Register = ({ display, invalid, ...props }) => {
             inputEduPlace: inputEduPlace,
         }));
     }
-
-
-    const [passwordShown, setPasswordShown] = useState(false);
-    const togglePasswordVisiblity = () => (setPasswordShown(passwordShown ? false : true))
 
     const [displayEdu, setDisplayEdu] = useState("displayNone");
     const handelEdu = function (e) {
@@ -296,7 +292,7 @@ const Register = ({ display, invalid, ...props }) => {
             {
                 value: "",
                 text: "شهر"
-            },{
+            }, {
                 value: "اصفهان",
                 text: "اصفهان"
             }, {
@@ -311,7 +307,7 @@ const Register = ({ display, invalid, ...props }) => {
             {
                 value: "",
                 text: "شهر"
-            },{
+            }, {
                 value: "مشهد",
                 text: "مشهد"
             }, {
@@ -325,7 +321,7 @@ const Register = ({ display, invalid, ...props }) => {
             {
                 value: "",
                 text: "شهر"
-            },{
+            }, {
                 value: "شهربابک",
                 text: "شهربابک"
             }, {
@@ -339,7 +335,7 @@ const Register = ({ display, invalid, ...props }) => {
             {
                 value: "",
                 text: "شهر"
-            },{
+            }, {
                 value: "اردکان",
                 text: "اردکان"
             }, {
@@ -353,7 +349,7 @@ const Register = ({ display, invalid, ...props }) => {
             {
                 value: "",
                 text: "شهر"
-            },{
+            }, {
                 value: "گنبدکاووس ",
                 text: "گنبدکاووس "
             }, {
@@ -367,7 +363,7 @@ const Register = ({ display, invalid, ...props }) => {
             {
                 value: "",
                 text: "شهر"
-            },{
+            }, {
                 value: "ملایر",
                 text: "ملایر"
             }, {
@@ -381,7 +377,7 @@ const Register = ({ display, invalid, ...props }) => {
             {
                 value: "",
                 text: "شهر"
-            },{
+            }, {
                 value: "رشت",
                 text: "رشت"
             }, {
@@ -395,7 +391,7 @@ const Register = ({ display, invalid, ...props }) => {
             {
                 value: "",
                 text: "شهر"
-            },{
+            }, {
                 value: "آمل",
                 text: "آمل"
             }, {
@@ -409,7 +405,7 @@ const Register = ({ display, invalid, ...props }) => {
             {
                 value: "",
                 text: "شهر"
-            },{
+            }, {
                 value: "خرم‌آباد",
                 text: "خرم‌آباد"
             }, {
@@ -609,11 +605,13 @@ const Register = ({ display, invalid, ...props }) => {
                     <button className="submit" onClick={(e) => submitData(e)}>ثبت نام</button>
                 </form>
             </div>
-            {displayComponent === 'invisible' && (
-                <InfoRegister nameValue={inputNameState.value} lastValue={inputLastState.value}
-                    emailValue={inputEmailState.value} provincesValue={inputProvincesState.value}
-                    townValue={inputTownState.value} eduValue={inputEduState.value} placeEduValue={inputEduPlaceState.value} />
-            )}
+            <div>
+                {displayComponent === 'invisible' && (
+                    <InfoRegister nameValue={inputNameState.value} lastValue={inputLastState.value}
+                        emailValue={inputEmailState.value} provincesValue={inputProvincesState.value}
+                        townValue={inputTownState.value} eduValue={inputEduState.value} placeEduValue={inputEduPlaceState.value} />
+                )}
+            </div>
         </div>
     )
 }

@@ -6,7 +6,7 @@ import { FaEyeSlash } from 'react-icons/fa';
 import { FaEye } from 'react-icons/fa';
 
 
-const Entrance = ({ invalid,...props }) => {
+const Entrance = ({ invalid, passwordShown, togglePasswordVisiblity,hideComponent,emailValue,...props }) => {
 
     const [validInputs, setState] = useState({
         inputEmail: false,
@@ -26,6 +26,7 @@ const Entrance = ({ invalid,...props }) => {
         let { invalid, value } = inputEmailState
         if (e.target.value) {
             value = e.target.value
+            emailValue(value)
         }
         setInputEmailState({
             invalid: invalid,
@@ -38,7 +39,7 @@ const Entrance = ({ invalid,...props }) => {
     }
     const checkPass = function (e) {
         let { inputEmail, inputPass } = validInputs;
-        inputPass = (String(e.target.value).length > 8) ? true : false;
+        inputPass = (String(e.target.value).length > 7) ? true : false;
         let { invalid, value } = inputPassState
         if (e.target.value) {
             value = e.target.value
@@ -52,20 +53,58 @@ const Entrance = ({ invalid,...props }) => {
             inputPass: inputPass,
         }));
     }
+    const submitEntrance = function (e) {
+        e.preventDefault();
+        if (!validInputs.inputEmail) {
+            let { value } = inputEmailState
+            setInputEmailState({
+                invalid: "invalid",
+                value: value
+            })
+        } else {
+            let { value } = inputEmailState
+            setInputEmailState({
+                invalid: "",
+                value: value
+            })
+        }
+        if (!validInputs.inputPass) {
+            let { value } = inputPassState
+            setInputPassState({
+                invalid: "invalid",
+                value: value
+            })
+        } else {
+            let { value } = inputPassState
+            setInputPassState({
+                invalid: "",
+                value: value
+            })
+        }
+        if(validInputs.inputEmail && validInputs.inputPass){
+            // setStateComponentForm="displayNone"
+            hideComponent()
+        }
+    }
+    const forgetPass=function(){
+        
+    }
     return (
         <div className={`container-form`}>
             <h2 className="titr"> خوش آمدید </h2>
             <form action="">
 
                 <input className={`input ${invalid = inputEmailState.invalid}`} type="email" placeholder=" پست الکترونیک &#10035;" onChange={(e) => checkEmail(e)} />
-                {/* <div className={`flex-pass ${invalid = inputPassState.invalid}`}>
+                <div className={`flex-pass ${invalid = inputPassState.invalid}`}>
                     {passwordShown ? <FaEye className="icon-eye" onClick={togglePasswordVisiblity} /> : <FaEyeSlash className="icon-eye" onClick={togglePasswordVisiblity} />}
                     <input type={passwordShown ? "text" : "password"} id="pwd" name="pwd" placeholder=" کلمه عبور &#10035;" onKeyUp={(e) => checkPass(e)} />
-                </div> */}
-                {/* <button className="submit" onClick={(e) => submitData(e)}>ثبت نام</button> */}
+                </div>
+                <p onClick={forgetPass}>فراموش کرده‌اید؟</p>
+                <button className="submit" onClick={(e) => submitEntrance(e)} >ورود</button>
             </form>
         </div>
     )
 }
 
 export default Entrance;
+

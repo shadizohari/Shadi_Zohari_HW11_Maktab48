@@ -3,6 +3,8 @@ import '../css/App.css';
 import Button from "./Button"
 import Entrance from './Entrance';
 import Register from './Register';
+import Welcome from './Welcome';
+
 function RegisterEntrance({ visible, ...props }) {
 
   const [state, setState] = useState([
@@ -21,6 +23,17 @@ function RegisterEntrance({ visible, ...props }) {
   ])
   const [stateForm, setStateForm] = useState("register")
 
+  const [stateVisible, setStateVisible] = useState(true)
+
+  const hideComponent = function () {
+    setStateVisible(false);
+  }
+
+  const[setEmailValue,stateEmailValue]=useState("")
+  const emailValue = function(x){
+    stateEmailValue(x)
+  }
+
   const onclickHandel = (buttonId) => {
     for (let i = 0; i < state.length; i++) {
       if (buttonId !== state[i].id) {
@@ -37,29 +50,35 @@ function RegisterEntrance({ visible, ...props }) {
     let newstate = [...state]
     setState(newstate)
   }
-  return (
+  // eyeicon in password
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => (setPasswordShown(passwordShown ? false : true))
 
-    <div >
-      <div className="parent-button">
-        {state.map((button, index) => {
-          return (
-            <Button active={button.active} classes={button.class} onClickHandel={() => onclickHandel(button.id)} textBtn={button.text} key={button.id} />
-          )
-        })}
+  if (stateVisible) {
+    return (
+      <div >
+        <div className="parent-button">
+          {state.map((button, index) => {
+            return (
+              <Button active={button.active} classes={button.class} onClickHandel={() => onclickHandel(button.id)} textBtn={button.text} key={button.id} />
+            )
+          })}
+        </div>
+        <div>
+          {stateForm === 'register' && (
+            <Register passwordShown={passwordShown} togglePasswordVisiblity={togglePasswordVisiblity} />
+          )}
+          {stateForm === 'entrance' && (
+            <Entrance passwordShown={passwordShown} hideComponent={hideComponent} emailValue={emailValue} togglePasswordVisiblity={togglePasswordVisiblity} />
+          )}
+        </div>
       </div>
-      <div>
-        {stateForm === 'register' && (
-          <Register />
-        )}
-        {stateForm === 'entrance' && (
-          <Entrance />
-        )}
-
-
-
-      </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <Welcome userEmail={setEmailValue}/>
+    )
+  }
 }
 
 export default RegisterEntrance;

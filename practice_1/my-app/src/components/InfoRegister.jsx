@@ -39,26 +39,13 @@ function InfoRegister({ nameValue, lastValue, provincesValue, townValue, eduValu
       {labelValueState.map((label, index) => {
         return (
           <div key={label.id} className="container-value">
-            <h3>{label.label}</h3>
+            <h3>{label.label}  :</h3>
             <h3>{label.value}</h3>
           </div>
         )
       })}
-
-
-
     </div>
   );
 }
 
 export default InfoRegister;
-
-// {labelValue.map((labelValue, index) => {
-//   return (
-//     <div className="container-value">
-//       <h3>{labelValue.label}</h3>
-//       <h3>{labelValue.value}</h3>
-//     </div>
-//   )
-// })
-// }

@@ -3,6 +3,7 @@
     flex-direction: column;
     color: white;
     direction: rtl;
+    margin-top: 35px;
 }
 
 .container-label{

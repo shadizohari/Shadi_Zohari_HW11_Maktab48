@@ -21,11 +21,11 @@
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: #12b088;
 }
 
 .inactive {
-    background-color: #008CBA;
+    background-color: #425258;
 }
 
 .button1:hover {}
@@ -36,4 +36,9 @@
 
 }
 
-.button2:hover {}
+@media only screen and (max-width: 400px) {
+    .parent-button {
+        /* display: flex; */
+        flex-direction: column;
+    }
+  }
