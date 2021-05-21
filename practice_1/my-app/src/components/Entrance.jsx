@@ -83,10 +83,11 @@ const Entrance = ({ invalid, passwordShown, togglePasswordVisiblity,hideComponen
         }
         if(validInputs.inputEmail && validInputs.inputPass){
             // setStateComponentForm="displayNone"
-            hideComponent()
+            hideComponent("welcome")
         }
     }
     const forgetPass=function(){
+        hideComponent("forgetPass")
         
     }
     return (

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../css/App.css';
 import Button from "./Button"
 import Entrance from './Entrance';
+import ForgetPass from './ForgetPass';
 import Register from './Register';
 import Welcome from './Welcome';
 
@@ -23,14 +24,13 @@ function RegisterEntrance({ visible, ...props }) {
   ])
   const [stateForm, setStateForm] = useState("register")
 
-  const [stateVisible, setStateVisible] = useState(true)
-
-  const hideComponent = function () {
-    setStateVisible(false);
+  const [stateVisible, setStateVisible] = useState("major")
+  const hideComponent = function (x) {
+    setStateVisible(x);
   }
 
-  const[setEmailValue,stateEmailValue]=useState("")
-  const emailValue = function(x){
+  const [setEmailValue, stateEmailValue] = useState("")
+  const emailValue = function (x) {
     stateEmailValue(x)
   }
 
@@ -54,7 +54,7 @@ function RegisterEntrance({ visible, ...props }) {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => (setPasswordShown(passwordShown ? false : true))
 
-  if (stateVisible) {
+  if (stateVisible === "major") {
     return (
       <div >
         <div className="parent-button">
@@ -74,9 +74,13 @@ function RegisterEntrance({ visible, ...props }) {
         </div>
       </div>
     );
-  } else {
+  } else if (stateVisible === "welcome") {
     return (
-      <Welcome userEmail={setEmailValue}/>
+      <Welcome userEmail={setEmailValue} />
+    )
+  } else if (stateVisible === "forgetPass") {
+    return (
+      <ForgetPass hideComponent={hideComponent}/>
     )
   }
 }

@@ -1,0 +1,24 @@
+.forgetPass {
+    color: white;
+    direction: rtl;
+    /* height: 100%; */
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.btnForgetPass{
+    background-color:tomato;
+    margin-top: 30px;
+    border-radius: 4px;
+
+}
+.btnForgetPass:hover{
+    background-color: rgba(255, 99, 71, 0.781);
+}
+@media only screen and (max-width: 400px) {
+    h3.titr-res{
+      font-size: 16px;
+    }
+  }
